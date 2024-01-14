@@ -1,20 +1,18 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-        def inner(n: int, memo) -> int:
-            if n == 1:
-                return 1
-            if n == 2:
-                return 2       
-
-            m = memo.get(n, -1)
-            if m != -1:
-                return m
-
-            res = inner(n-1, memo) + inner(n-2, memo)
-            memo[n] = res
-            return res
+        if n == 1:
+            return 1
         
-        return inner(n, {})
+        if n == 2:
+            return 2
 
+        arr = [-1] * (n+1)
+
+        arr[1] = 1
+        arr[2] = 2
+
+        for i in range(3, n+1):
+            arr[i] = arr[i-1] + arr[i-2]
         
+        return arr[n]
 
