@@ -13,11 +13,12 @@ class Solution {
 public:
     int dfs(TreeNode* root, int num) {
         int val = root->val;
-        if (root->left == nullptr && root->right == nullptr) return num * 10 + val;
+        int calc = num*10+val;
+        if (root->left == nullptr && root->right == nullptr) return calc;
 
         int sum = 0;
-        if (root->left != nullptr) sum += this->dfs(root->left, num*10+val);
-        if (root->right != nullptr) sum += this->dfs(root->right, num*10+val);
+        if (root->left != nullptr) sum += this->dfs(root->left, calc);
+        if (root->right != nullptr) sum += this->dfs(root->right, calc);
 
         return sum;
     }
