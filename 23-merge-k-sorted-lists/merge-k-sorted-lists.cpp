@@ -11,25 +11,25 @@
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        ListNode head(-1, nullptr);
-        ListNode* walker = &head;
+        int total = 0;
+        for (auto e:lists) while (e!=nullptr) total += 1, e = e->next;
 
-        while(1) {
-            int idxMax = -1;
-            for (int i=0;i<lists.size();i++) {
-                auto elmt = lists[i];
-                if (elmt == nullptr) continue;
+        vector<int> allVals(total);
+        int idx = 0;
+        // for (auto e:lists) {
+        //     while (e!=nullptr) {
+        //         allVals[idx] = e->val;
+        //         e = e->next;
+        //         idx += 1;
+        //     }
+        // }
+        for (auto e:lists) while (e!=nullptr) allVals[idx] = e->val, e = e->next, idx += 1;
+        sort(allVals.begin(), allVals.end());
 
-                if (idxMax == -1 || elmt->val < lists[idxMax]->val) {
-                    idxMax = i;
-                }
-            }
+        auto head = ListNode();
+        auto walker = &head;
+        for (auto e:allVals) walker->next = new ListNode(e), walker = walker->next;
 
-            if (idxMax == -1) break;
-            walker->next = lists[idxMax];
-            lists[idxMax] = lists[idxMax]->next;
-            walker = walker->next;
-        }
-        return head.next;
+        return head.next;   
     }
 };
