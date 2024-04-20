@@ -11,14 +11,6 @@
  */
 class Solution {
 public:
-    void dfs(vector<int>& out, TreeNode* root) {
-        if (root == nullptr) return;
-
-        dfs(out, root->left);
-        dfs(out, root->right);
-        out.push_back(root->val);
-    }
-
     vector<int> postorderTraversal(TreeNode* root) {
         if (root==nullptr) return {};
 
@@ -43,18 +35,6 @@ public:
                 stack.push_back(cur->left);
                 cur->left = nullptr;
             }
-
-
-
-            // if (stack.empty() && root == nullptr) break;
-
-            // auto cur = stack.back();
-            // stack.pop_back();
-
-            // if (cur == nullptr) continue;
-
-            // stack.push_back(cur->left);
-            // stack.push_back(cur->right);
         }
 
         return res;
