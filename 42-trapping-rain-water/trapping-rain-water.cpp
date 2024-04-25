@@ -1,40 +1,27 @@
 class Solution {
 public:
     int trap(vector<int>& height) {
-        int sum = 0;
         int n = height.size();
+        if (n == 0) return 0;
 
-        int curIdx1 = 0;
-        int curIdx2 = 1;
-        while (1) {
-            if (curIdx2 >= n) break;
+        vector<int> left(n, 0);
+        vector<int> right(n, 0);
 
-            if (height[curIdx1] > height[curIdx2]) {
-                sum += (height[curIdx1] - height[curIdx2]);
-                curIdx2++;
-            } else {
-                curIdx1 = curIdx2;
-                curIdx2++;
-            }
-
-            cout << "idx" << curIdx1 << " sum " << sum << "\n";
+        left[0] = height[0];
+        for (int i=1;i<n;i++) {
+            left[i] = max(left[i-1], height[i]);
         }
 
-        height.push_back(0);
-
-        int curIdx11 = n;
-        int curIdx22 = n-1;
-        while (1) {
-            if (curIdx22 == curIdx1) break;
-
-            if (height[curIdx22] >= height[curIdx11]) {
-                curIdx11 = curIdx22;
-            }
-
-            sum -= (height[curIdx1] - height[curIdx11]);
-            curIdx22--;
+        right[n-1] = height[n-1];
+        for (int i=n-2;i>=0;i--) {
+            right[i] = max(right[i+1], height[i]);
         }
 
-        return sum;
+        int trapped = 0;
+        for (int i=0;i<n;i++) {
+            trapped += min(left[i], right[i]) - height[i];
+        }
+
+        return trapped;
     }
 };
