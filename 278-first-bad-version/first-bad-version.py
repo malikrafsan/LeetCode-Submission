@@ -8,7 +8,7 @@ class Solution:
 
         last_mid = -1
         while l <= r:
-            mid = (l + r) // 2
+            mid = l + ((r-l) // 2)
 
             flag = isBadVersion(mid)
             if flag:
