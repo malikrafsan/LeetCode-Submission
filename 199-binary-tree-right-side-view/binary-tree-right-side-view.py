@@ -10,23 +10,22 @@ class Solution:
             return []
 
         result = []
-        q = deque()
-        q.append([root]) # queue<list>
-        while len(q) != 0:
-            cur = q[0]
-            q.pop()
+        current = [root]
 
-            result.append(cur[-1].val)
+        while True:
+            result.append(current[-1].val)
 
             new_level = []
-            for c in cur:
+            for c in current:
                 if c.left is not None:
                     new_level.append(c.left)
                 if c.right is not None:
                     new_level.append(c.right)
             
-            if len(new_level) != 0:
-                q.append(new_level)
+            if len(new_level) == 0:
+                break
+
+            current = new_level
 
         return result
 
