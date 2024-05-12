@@ -12,8 +12,6 @@ class Solution:
             else:
                 mp[elmt] += 1
         
-        print(arr)
-        print(mp)
         for key in mp:
             if mp[key] == 2:
                 return key
