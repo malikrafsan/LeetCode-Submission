@@ -19,14 +19,7 @@ class Solution:
             if len(elmt) != (n-1):
                 continue
             
-            flag = True
-            for x in elmt:
-                if x == i:
-                    flag = False
-                    break
-            
-            if flag:
-                return i
+            return i
         
         return -1
 
