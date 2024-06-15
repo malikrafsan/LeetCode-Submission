@@ -14,10 +14,11 @@ class Solution:
         res += "1"+cnt[0] if cnt[1] == 1 else str(cnt[1]) + cnt[0]
         return res
             
-
     def countAndSay(self, n: int) -> str:
-        if n == 1:
-            return "1"
+        res = "1"
+        for x in range(2,n+1):
+            print(res)
+            res = self.rle(res)
         
-        res = self.rle(self.countAndSay(n-1))
         return res
+
